@@ -1,0 +1,58 @@
+DEFINIÁLD SPAM_KULCSSZAVAK-AT, MINT SZTRINGEK LISTÁJA
+DEFINIÁLD URL_MINTA-T, MINT REGEX
+
+FÜGGVÉNY BEMENET_OLVASÁSA()
+    ÍRD KI: "Kérlek, másold be a szöveget (több soros is lehet). Ha végeztél, nyomd meg a Ctrl+D-t vagy a Ctrl+Z-t:"
+    OLVASD BE az összes sort a standard bemenetről
+    TÁVOLÍTSD EL az új sorokat, helyettesítsd őket szóközökkel
+    ADJ VISSZA a megtisztított szöveget
+
+FÜGGVÉNY SPAM_FILTER(szöveg)
+    alakítsd át a szöveget kisbetűssé
+    inicializáld talalt_kulcsszavak-at, mint üres szótár
+    inicializáld talalt_url-eket, mint üres lista
+
+    MINDEN egyes kulcsszóra a spam_kulcsszavak-ban
+        SZÁMOLD MEG a kulcsszó előfordulásait a szövegben
+        HA az előfordulások száma > 0
+            ADD HOZZÁ a kulcsszót és az előfordulások számát a talalt_kulcsszavak-hoz
+
+    KERESS MEG minden egyezést az url_minta alapján a szövegben
+    ADD HOZZÁ az egyezéseket a talalt_url-ekhez
+
+    inicializáld nem_biztonsagos_url-t, mint üres lista
+    MINDEN url-re a talalt_url-ekben
+        HA az url "http://"-el kezdődik
+            ADD HOZZÁ az url-t a nem_biztonsagos_url-hez
+
+    ELLENŐRIZD, hogy a talalt_kulcsszavak vagy a talalt_url nem üresek-e
+    ADJ VISSZA (spam_e, talalt_kulcsszavak, talalt_url, nem_biztonsagos_url)
+
+FÜGGVÉNY MAIN()
+    HÍVD MEG a bemenet_olvasása() függvényt, és tárold az eredményt a szöveg változóban
+
+    HÍVD MEG a spam_filter(szöveg) függvényt, és tárold az eredményeket (spam_e, talalt_kulcsszavak, talalt_url, nem_biztonsagos_url)-ként
+
+    HA spam_e
+        ÍRD KI: "Az email valószínűleg SPAM!"
+    KÜLÖNBEN
+        ÍRD KI: "Az email valószínűleg NEM SPAM."
+
+    HA talalt_kulcsszavak nem üresek
+        ÍRD KI: "Talált spam-re utaló kulcsszavak és előfordulásaik:"
+        MINDEN kulcsszó és szám párra a talalt_kulcsszavak-ban
+            ÍRD KI a kulcsszót és az előfordulások számát
+
+    HA talalt_url nem üresek
+        ÍRD KI: "Talált gyanús URL-ek:"
+        MINDEN url-re a talalt_url-ekben
+            ÍRD KI az url-t
+
+    HA nem_biztonsagos_url nem üresek
+        ÍRD KI: "Figyelmeztetés: A következő URL-ek tanúsítványa nem biztonságos:"
+        MINDEN url-re a nem_biztonsagos_url-ben
+            ÍRD KI az url-t
+
+HÍVD MEG MAIN()
+
+VÉGE

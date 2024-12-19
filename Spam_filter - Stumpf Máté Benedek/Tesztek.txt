@@ -1,0 +1,42 @@
+1. példa: nem spam email:
+
+Kedves felhasználó!
+
+Örömmel értesítünk, hogy az alkalmazásunk legújabb verziója most elérhető! Az új frissítés számos hasznos funkcióval és fejlesztéssel bővítette az alkalmazást, hogy még kényelmesebbé és gyorsabbá tegye a használatát.
+
+A frissítés során javítottuk a sebességet, és egy új, felhasználóbarát felületet is bevezettünk, hogy a navigáció még egyszerűbb legyen.
+
+Töltse le most a legújabb verziót itt:
+https://www.alkalmazasunk.hu/frissites
+
+Köszönjük, hogy velünk tart, és reméljük, hogy az új verzió még jobb élményt nyújt majd!
+
+Üdvözlettel,
+Az Alkalmazás Fejlesztői Csapata
+
+-----------------------------------------------------
+
+2. példa: nem spam email:
+
+Szia XY!
+
+Holnap nagy meeting lesz, ne késs!!
+
+Üdv: Sziszifusz
+
+-----------------------------------------------------
+
+3. példa: spam email:
+
+Kedves felhasználó!
+
+Az ajánlatunk most véget ér, és csak te juthatsz hozzá! Kattints ide a pénzkeresési lehetőséghez, és ingyen szerezhetsz extra jövedelmet!
+
+A legjobb nyereményjátékok és pénzkeresési lehetőségek várnak rád!
+
+Ne hagyd ki! Kattints a linkre és kezdj el pénzt keresni ma:
+http://www.exkluzivnyeremeny.com
+
+Üdv,
+A Pénzkeresési Csapat
+
