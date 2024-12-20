@@ -1,58 +1,72 @@
-DEFINIÁLD SPAM_KULCSSZAVAK-AT, MINT SZTRINGEK LISTÁJA
-DEFINIÁLD URL_MINTA-T, MINT REGEX
+Eljárás Spam_Szűrő_Program
+    Definiáld SPAM_KULCSSZAVAK-AT, mint stringek listája
+    Definiáld URL_MINTA-T, mint regex
 
-FÜGGVÉNY BEMENET_OLVASÁSA()
-    ÍRD KI: "Kérlek, másold be a szöveget (több soros is lehet). Ha végeztél, nyomd meg a Ctrl+D-t vagy a Ctrl+Z-t:"
-    OLVASD BE az összes sort a standard bemenetről
-    TÁVOLÍTSD EL az új sorokat, helyettesítsd őket szóközökkel
-    ADJ VISSZA a megtisztított szöveget
+    Eljárás Bemenet_Olvasása()
+        Írd ki: "Kérlek, másold be a szöveget (több soros is lehet). Ha végeztél, nyomd meg a Ctrl+D-t vagy a Ctrl+Z-t:"
+        Olvasd be az összes sort a standard bemenetről
+        Távolítsd el az új sorokat, helyettesítsd őket szóközökkel
+        Adj vissza a megtisztított szöveget
+    Eljárás vége
 
-FÜGGVÉNY SPAM_FILTER(szöveg)
-    alakítsd át a szöveget kisbetűssé
-    inicializáld talalt_kulcsszavak-at, mint üres szótár
-    inicializáld talalt_url-eket, mint üres lista
+    Eljárás Spam_Szűrő(szöveg)
+        Alakítsd át a szöveget kisbetűssé
+        Inicializáld TALÁLT_KULCSSZAVAK-at, mint üres szótár
+        Inicializáld TALÁLT_URL-eket, mint üres lista
 
-    MINDEN egyes kulcsszóra a spam_kulcsszavak-ban
-        SZÁMOLD MEG a kulcsszó előfordulásait a szövegben
-        HA az előfordulások száma > 0
-            ADD HOZZÁ a kulcsszót és az előfordulások számát a talalt_kulcsszavak-hoz
+        Minden egyes kulcsszóra a SPAM_KULCSSZAVAK-ban
+            Számold meg a kulcsszó előfordulásait a szövegben
+            Ha az előfordulások száma > 0 akkor
+                Add hozzá a kulcsszót és az előfordulások számát a TALÁLT_KULCSSZAVAK-hoz
+            Elágazás vége
+        Ciklus vége
 
-    KERESS MEG minden egyezést az url_minta alapján a szövegben
-    ADD HOZZÁ az egyezéseket a talalt_url-ekhez
+        Keress meg minden egyezést az URL_MINTA alapján a szövegben
+        Add hozzá az egyezéseket a TALÁLT_URL-ekhez
 
-    inicializáld nem_biztonsagos_url-t, mint üres lista
-    MINDEN url-re a talalt_url-ekben
-        HA az url "http://"-el kezdődik
-            ADD HOZZÁ az url-t a nem_biztonsagos_url-hez
+        Inicializáld NEM_BIZTONSÁGOS_URL-t, mint üres lista
+        Minden URL-re a TALÁLT_URL-ekben
+            Ha az URL "http://"-el kezdődik akkor
+                Add hozzá az URL-t a NEM_BIZTONSÁGOS_URL-hez
+            Elágazás vége
+        Ciklus vége
 
-    ELLENŐRIZD, hogy a talalt_kulcsszavak vagy a talalt_url nem üresek-e
-    ADJ VISSZA (spam_e, talalt_kulcsszavak, talalt_url, nem_biztonsagos_url)
+        Ellenőrizd, hogy a TALÁLT_KULCSSZAVAK vagy a TALÁLT_URL nem üresek-e
+        Adj vissza (SPAM_E, TALÁLT_KULCSSZAVAK, TALÁLT_URL, NEM_BIZTONSÁGOS_URL)
+    Eljárás vége
 
-FÜGGVÉNY MAIN()
-    HÍVD MEG a bemenet_olvasása() függvényt, és tárold az eredményt a szöveg változóban
+    Eljárás Fő_Menü()
+        Hívd meg a Bemenet_Olvasása() eljárást, és tárold az eredményt a SZÖVEG változóban
 
-    HÍVD MEG a spam_filter(szöveg) függvényt, és tárold az eredményeket (spam_e, talalt_kulcsszavak, talalt_url, nem_biztonsagos_url)-ként
+        Hívd meg a Spam_Szűrő(SZÖVEG) eljárást, és tárold az eredményeket (SPAM_E, TALÁLT_KULCSSZAVAK, TALÁLT_URL, NEM_BIZTONSÁGOS_URL)-ként
 
-    HA spam_e
-        ÍRD KI: "Az email valószínűleg SPAM!"
-    KÜLÖNBEN
-        ÍRD KI: "Az email valószínűleg NEM SPAM."
+        Ha SPAM_E akkor
+            Írd ki: "Az email valószínűleg SPAM!"
+        Különben
+            Írd ki: "Az email valószínűleg NEM SPAM."
+        Elágazás vége
 
-    HA talalt_kulcsszavak nem üresek
-        ÍRD KI: "Talált spam-re utaló kulcsszavak és előfordulásaik:"
-        MINDEN kulcsszó és szám párra a talalt_kulcsszavak-ban
-            ÍRD KI a kulcsszót és az előfordulások számát
+        Ha TALÁLT_KULCSSZAVAK nem üresek akkor
+            Írd ki: "Talált spam-re utaló kulcsszavak és előfordulásaik:"
+            Minden kulcsszó és szám párra a TALÁLT_KULCSSZAVAK-ban
+                Írd ki a kulcsszót és az előfordulások számát
+            Ciklus vége
+        Elágazás vége
 
-    HA talalt_url nem üresek
-        ÍRD KI: "Talált gyanús URL-ek:"
-        MINDEN url-re a talalt_url-ekben
-            ÍRD KI az url-t
+        Ha TALÁLT_URL nem üresek akkor
+            Írd ki: "Talált gyanús URL-ek:"
+            Minden URL-re a TALÁLT_URL-ekben
+                Írd ki az URL-t
+            Ciklus vége
+        Elágazás vége
 
-    HA nem_biztonsagos_url nem üresek
-        ÍRD KI: "Figyelmeztetés: A következő URL-ek tanúsítványa nem biztonságos:"
-        MINDEN url-re a nem_biztonsagos_url-ben
-            ÍRD KI az url-t
+        Ha NEM_BIZTONSÁGOS_URL nem üresek akkor
+            Írd ki: "Figyelmeztetés: A következő URL-ek tanúsítványa nem biztonságos:"
+            Minden URL-re a NEM_BIZTONSÁGOS_URL-ben
+                Írd ki az URL-t
+            Ciklus vége
+        Elágazás vége
+    Eljárás vége
 
-HÍVD MEG MAIN()
-
-VÉGE
+    Hívd meg a Fő_Menü() eljárást
+Eljárás vége
